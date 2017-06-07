@@ -1,0 +1,22 @@
+{
+  "name": "BabaRadio",
+  "version": "1.0.0",
+  "description": "A simple radio bot for discord",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perronosaurio/Baba-Radio.git"
+  },
+  "author": "perronosaurio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/perronosaurio/Baba-Radio/issues"
+  },
+  "homepage": "http://baba.is-best.net/",
+  "dependencies": {
+    "discord.js": "^11.1.0"
+  }
+}
