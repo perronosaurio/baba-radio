@@ -96,7 +96,7 @@ var commands = {
 	},
 	"invite": {
 		process: function (msg, suffix) {
-			msg.channel.send(":tickets:  |  **Invite link:** `https://discordapp.com/oauth2/authorize?&client_id=321784105119514625&scope=bot&permissions=470019135`");
+			msg.channel.send(":tickets:  |  **Invite link:** `https://discordapp.com/oauth2/authorize?&client_id=321784105119514625&scope=bot&permissions=36702208`");
 		}
 	}
 };
