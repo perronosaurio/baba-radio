@@ -9,7 +9,7 @@ A simple radio bot for discord
 3. Open console and put `npm install` and `node index.js`
 
 ### Commands:
-`br!play` | Join to your channel and play the music
-`br!help` | Display help message
-`br!leave` | Leaves the voice channel
-`br!invite` | Generate an invitation link you can use to invite the bot to your server
+`br!play` - Join to your channel and play the music
+`br!help` - Display help message
+`br!leave` - Leaves the voice channel
+`br!invite` - Generate an invitation link you can use to invite the bot to your server
