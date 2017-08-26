@@ -1,7 +1,9 @@
 # Baba-Radio
 A simple radio bot for discord
 
-[Click here to add Baba Radio to your server](https://discordapp.com/oauth2/authorize?&client_id=321784105119514625&scope=bot&permissions=470019135)
+[Click here to add Baba Radio to your server](https://discordapp.com/oauth2/authorize?&client_id=321784105119514625&scope=bot&permissions=36702208)
+
+[Click here to add Baba to your server](https://discordapp.com/oauth2/authorize?&client_id=273463982625652737&scope=bot&permissions=470019135)
 
 ### Install:
 1. Donwload ([nodejs](https://nodejs.org/es/))
