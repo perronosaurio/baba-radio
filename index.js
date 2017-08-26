@@ -1,6 +1,7 @@
 var Discord = require('discord.js');
 var bot = new Discord.Client();
 var config = require('./config.json');
+console.log("Starting bot...");
 
 var commands = {
     "help": {
@@ -9,8 +10,10 @@ var commands = {
                 ":page_facing_up:  |  **Commands available:**",
 				"```perl",
                 "br!help #Sends this message",
-                "br!join #Join to your channel and play the music",
+                "br!join #Join to your channel",
 				"br!leave #Leaves the voice channel",
+				"br!play <rap/jazz/dubstep> #Play the radio",
+				//"br!search #Find a radio and play",
 				"br!invite #Generate an invitation link you can use to invite the bot to your server",
 				"```",
 				"",
@@ -27,15 +30,55 @@ var commands = {
 				msg.channel.send(":warning:  |  **I\'m unable to play music in this channel.**");
 				return;
 			}
-			msg.channel.send(":loudspeaker:  |  **Successfully joined!**")
-            msg.member.voiceChannel.join().then(connection => {
-                require('http').get("http://streaming.radionomy.com/JamendoLounge", (res) => {
-                    connection.playStream(res);
-                })
-            })
-            .catch(console.error);
+			msg.member.voiceChannel.join();
+			msg.channel.send(":loudspeaker:  |  **Successfully joined!**");
         }
     },
+    "play": {
+        process: function (msg, suffix) {
+			const channel = msg.member.voiceChannel;
+			if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
+			if (suffix) {
+				if (suffix === "rap" || suffix === "Rap") {
+					msg.channel.send(":musical_note:  |  **Playing:** `Rap`");
+					var radio = "A-RAP-FM-WEB";
+				} else if (suffix === "jazz" || suffix === "Jazz") {
+					msg.channel.send(":musical_note:  |  **Playing:** `Jazz`");
+					var radio = "WineFarmAndTouristradio";
+				} else if (suffix === "dubstep" || suffix === "Dubstep") {
+					msg.channel.send(":musical_note:  |  **Playing:** `Dubstep`");
+					var radio = "ELECTROPOP-MUSIC";
+				} else {
+					msg.channel.send(":warning:  |  **Enter a correct radio to play, available radios:** `Rap, jazz & dubstep`");
+					return;
+				}
+				msg.member.voiceChannel.join().then(connection => {
+					require('http').get("http://streaming.radionomy.com/"+radio, (res) => {
+						connection.playStream(res);
+					})
+				})
+				.catch(console.error);
+			} else {
+				msg.channel.send(":warning:  |  **Enter a correct radio to play, available radios:** `Rap, jazz & dubstep`");
+			}
+        }
+    },
+/*	"search": {
+		process: function (msg, suffix) {
+			const channel = msg.member.voiceChannel;
+			if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
+			if (!suffix) {
+				msg.channel.send(":warning:  |  **Insert a tag to search**");
+				return;
+			}
+			msg.member.voiceChannel.join().then(connection => {
+				require('http').get("http://streaming.radionomy.com/"+suffix, (res) => {
+					connection.playStream(res);
+				})
+			})
+			msg.channel.send(":musical_note:  |  **Searching and reproducing...**");
+		}
+	},*/
 	"leave": {
 		process: function (msg, suffix) {
             const voiceChannel = msg.member.voiceChannel;
