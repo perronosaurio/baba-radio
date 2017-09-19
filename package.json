@@ -1,7 +1,7 @@
 {
   "name": "BabaRadio",
   "version": "1.0.0",
-  "description": "A simple radio bot for discord",
+  "description": "A simple radio bot for Discord",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
