@@ -15,4 +15,8 @@
   "bugs": {
     "url": "https://github.com/perronosaurio/Baba-Radio/issues"
   },
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "opusscript": "0.0.6"
+  }
 }
