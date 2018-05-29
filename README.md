@@ -5,8 +5,8 @@
   <p>
     <a href="https://discord.gg/bj2Gr9g" target="_blank"><img src="https://img.shields.io/badge/dynamic/json.svg?label=Discord%20Sever&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F274896973105201152%2Fembed.json&query=%24.members.length&suffix=%20online" alt="Discord Server"/></a>
     <a href="https://discordapp.com/oauth2/authorize?client_id=273463982625652737&scope=bot&permissions=314497" target="_blank"><img
-    src="https://img.shields.io/badge/Invite-me%20to%20your%20Discord%20server-7289da.svg" alt "Invite Switchblade"></a>
-    <a href="https://github.com/perronosaurio/Baba-Radio/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/github.com/license/perronosaurio/Baba-Radio.svg" alt="License"/></a>
+    src="https://img.shields.io/badge/Invite-me%20to%20your%20Discord%20server-7289da.svg" alt "Invite Baba"></a>
+    <a href="https://github.com/perronosaurio/Baba-Radio/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/perronosaurio/Baba-Radio.svg" alt="License"/></a>
   </p>
 </div>
 
