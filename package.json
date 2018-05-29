@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "discord.js": "^11.3.2",
-    "opusscript": "0.0.6"
+    "opusscript": "^0.0.6"
   }
 }
