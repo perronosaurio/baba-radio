@@ -1,9 +1,13 @@
-var Discord = require('discord.js');
-var bot = new Discord.Client();
-var config = require('./config.json');
-console.log("Starting bot...");
+/*==========DISCORD.JS===========*/
+const Discord = require('discord.js');
+const bot = new Discord.Client();
+/*==============================*/
+const config = bot.config = require('./config.json'); // Global config file
+console.log("[!] Starting bot...");
+/*==============================*/
 
-var commands = {
+// Commands
+const commands = {
     "help": {
         process: function (msg, suffix) {
             msg.author.send([
@@ -63,22 +67,6 @@ var commands = {
 			}
         }
     },
-/*	"search": {
-		process: function (msg, suffix) {
-			const channel = msg.member.voiceChannel;
-			if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
-			if (!suffix) {
-				msg.channel.send(":warning:  |  **Insert a tag to search**");
-				return;
-			}
-			msg.member.voiceChannel.join().then(connection => {
-				require('http').get("http://streaming.radionomy.com/"+suffix, (res) => {
-					connection.playStream(res);
-				})
-			})
-			msg.channel.send(":musical_note:  |  **Searching and reproducing...**");
-		}
-	},*/
 	"leave": {
 		process: function (msg, suffix) {
             const voiceChannel = msg.member.voiceChannel;
@@ -101,29 +89,24 @@ var commands = {
 	}
 };
 
+// Ready Event
 bot.on("ready", function () {
-	console.log("Logged in " + bot.guilds.array().length + " servers");
-	bot.user.setGame(config.prefix + "help | " + bot.guilds.array().length + " servers"); 
+	console.log("[*] Logged in " + bot.guilds.array().length + " servers!");
+  setInterval(function() {
+  	bot.user.setGame(config.prefix + "help | " + bot.guilds.array().length + " servers");
+  }, 100000)
 });
 
-setInterval(function() {
-	bot.user.setGame(config.prefix + "help | " + bot.guilds.array().length + " servers");
-}, 100000)
-
+// Command System
 bot.on('message', function (msg) {
-    if(msg.content.indexOf(config.prefix) === 0) {
-		var cmdTxt = msg.content.split(" ")[0].substring(config.prefix.length);
-		var cmd = commands[cmdTxt];
-        var suffix = msg.content.substring(cmdTxt.length + config.prefix.length+1);
-        if(cmd !== undefined) {
-            cmd.process(msg, suffix);
-        } else {
-			cmdTxt = cmdTxt.replace('`', '');
-			if (cmdTxt === ''){
-				var cmdTxt = "none";
-			}
-            msg.channel.send(":warning:  |  **The command** `" + cmdTxt + "` **don't exist, for more help use** `" + config.prefix + "help`");
-        }
+    if (msg.content.indexOf(config.prefix) === 0) {
+  		var command = msg.content.split(" ")[0].substring(config.prefix.length);
+      var suffix = msg.content.substring(command.length + config.prefix.length + 1);
+      try {
+        commands[command].process(msg, suffix);
+      } catch(err) {
+        msg.channel.send({embed: {"description": "<:tick:445752370324832256> **Error:** ```\n" + err + "```", "color": 0xff0000}});
+      }
     }
 });
 
