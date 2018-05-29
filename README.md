@@ -1,9 +1,9 @@
-# Baba-Radio
-A simple radio bot for discord
+## Baba Radio
+**Baba Radio** is an open-source multi purpose radio Discord bot, built for those who want structure quality. The bot was made using the discord.js library.
 
-[Click here to add Baba Radio to your server](https://discordapp.com/oauth2/authorize?&client_id=321784105119514625&scope=bot&permissions=36702208)
+[Click here to add Baba to your server](https://discordapp.com/oauth2/authorize?client_id=273463982625652737&scope=bot&permissions=314497)
 
-[Click here to add Baba to your server](https://discordapp.com/oauth2/authorize?&client_id=273463982625652737&scope=bot&permissions=470019135)
+<iframe src="https://discordapp.com/widget?id=274896973105201152&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
 
 ### Install:
 1. Donwload ([nodejs](https://nodejs.org/es/))
