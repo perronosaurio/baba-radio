@@ -8,33 +8,32 @@ console.log("[!] Starting bot...");
 
 // Commands
 const commands = {
-    "help": {
-        process: function (msg, suffix, embed) {
-          const list = ["```perl",
-          "br!help #Sends this help message",
-          "br!join #Join to your voice channel",
-          "br!leave #Exit the voice channel",
-          "br!play <rap/jazz/dubstep> #Play a specific radio",
-          "br!invite #Generate an invitation link to invite me to your server```",
-          "Hi! I'm **Baba Radio**, a simple bot focused on play music. I'm developed by `perronosaurio (Waxtz)#1767`"]
-          embed.setDescription(list);
-          embed.setAuthor("Command list!", "https://cdn.discordapp.com/attachments/330739726321713153/451061091322298378/jajajaxdxdxd.png");
+  "help": {
+      process: function (msg, suffix, embed) {
+        const list = ["```perl",
+        "br!help #Sends this help message",
+        "br!join #Join to your voice channel",
+        "br!leave #Exit the voice channel",
+        "br!play <rap/jazz/dubstep> #Play a specific radio",
+        "br!invite #Generate an invitation link to invite me to your server```",
+        "Hi! I'm **Baba Radio**, a simple bot focused on play music. I'm developed by `perronosaurio (Waxtz)#1767`"]
+        embed.setDescription(list);
+        embed.setAuthor("Command list!", "https://cdn.discordapp.com/attachments/330739726321713153/451061091322298378/jajajaxdxdxd.png");
+        embed.setColor("#b92727");
+        msg.channel.send({ embed });
+      }
+  },
+  "join": {
+      process: function (msg, suffix, embed) {
+        if (!msg.member.voiceChannel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
+        if(!msg.member.voiceChannel.joinable) return msg.channel.send(":warning:  |  **I\'m unable to play music in this channel.**");
+        msg.member.voiceChannel.join().then(() => {
+          embed.setDescription("Successfully joined!");
           embed.setColor("#b92727");
           msg.channel.send({ embed });
-        }
-    },
-    "join": {
-        process: function (msg, suffix, embed) {
-			const channel = msg.member.voiceChannel;
-			if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
-			if(!msg.member.voiceChannel.joinable) {
-				msg.channel.send(":warning:  |  **I\'m unable to play music in this channel.**");
-				return;
-			}
-			msg.member.voiceChannel.join();
-			msg.channel.send(":loudspeaker:  |  **Successfully joined!**");
-        }
-    },
+        });
+      }
+  },
     "play": {
         process: function (msg, suffix, embed) {
 			const channel = msg.member.voiceChannel;
