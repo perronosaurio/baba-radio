@@ -25,62 +25,60 @@ const commands = {
   },
   "join": {
       process: function (msg, suffix, embed) {
-        if (!msg.member.voiceChannel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
-        if(!msg.member.voiceChannel.joinable) return msg.channel.send(":warning:  |  **I\'m unable to play music in this channel.**");
+        if (!msg.member.voiceChannel) return msg.channel.send('<:tick:445752370324832256> You are not on a voice channel.');
+        if (!msg.member.voiceChannel.joinable) return msg.channel.send("<:tick:445752370324832256> I\'m unable to play music in this channel.");
         msg.member.voiceChannel.join().then(() => {
-          embed.setDescription("Successfully joined!");
+          embed.setDescription("<:tick2:445752599631888384> Successfully joined!");
           embed.setColor("#b92727");
           msg.channel.send({ embed });
         });
       }
   },
-    "play": {
-        process: function (msg, suffix, embed) {
-			const channel = msg.member.voiceChannel;
-			if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
-			if (suffix) {
-				if (suffix === "rap" || suffix === "Rap") {
-					msg.channel.send(":musical_note:  |  **Playing:** `Rap`");
-					var radio = "A-RAP-FM-WEB";
-				} else if (suffix === "jazz" || suffix === "Jazz") {
-					msg.channel.send(":musical_note:  |  **Playing:** `Jazz`");
-					var radio = "WineFarmAndTouristradio";
-				} else if (suffix === "dubstep" || suffix === "Dubstep") {
-					msg.channel.send(":musical_note:  |  **Playing:** `Dubstep`");
-					var radio = "ELECTROPOP-MUSIC";
-				} else {
-					msg.channel.send(":warning:  |  **Enter a correct radio to play, available radios:** `Rap, jazz & dubstep`");
-					return;
-				}
-				msg.member.voiceChannel.join().then(connection => {
-					require('http').get("http://streaming.radionomy.com/"+radio, (res) => {
-						connection.playStream(res);
-					})
-				})
-				.catch(console.error);
-			} else {
-				msg.channel.send(":warning:  |  **Enter a correct radio to play, available radios:** `Rap, jazz & dubstep`");
-			}
-        }
-    },
 	"leave": {
 		process: function (msg, suffix) {
-            const voiceChannel = msg.member.voiceChannel;
-            if (voiceChannel) {
-                if (msg.member.hasPermission("MANAGE_GUILD") == false) {
-					msg.channel.send(":warning:  |  **You do not have sufficient permissions.**");
-                    return
-                }
-				msg.channel.send(":loudspeaker:  |  **Successfully left!**");
-                msg.member.voiceChannel.leave();
-            } else {
-                msg.channel.send(":warning:  |  **I am not currently in a voice channel.**");
-            }
+      if (!msg.member.hasPermission("MANAGE_GUILD")) return msg.channel.send("<:tick:445752370324832256> You do not have sufficient permissions.");
+      msg.member.voiceChannel.leave().then(() => {
+        embed.setDescription("<:tick2:445752599631888384> Successfully joined!");
+        embed.setColor("#b92727");
+        msg.channel.send({ embed });
+      }).catch(() => "<:tick:445752370324832256> I'm not in a voice channel.");
 		}
 	},
-	"invite": {
+  "play": {
+    process: function (msg, suffix, embed) {
+      if (!msg.member.voiceChannel) return msg.channel.send('<:tick:445752370324832256> You are not on a voice channel.');
+      if (!suffix) {
+        embed.setDescription("• Insert a correct radio to play.\n\n`[-]` **Available radios:** `Rap, jazz & dubstep`");
+        embed.setColor("#b92727");
+        return msg.channel.send({ embed });
+      }
+      let radio; // Empty Variable
+      if (suffix.toLowerCase() == "rap") {
+        radio = "A-RAP-FM-WEB";
+      } else if (suffix.toLowerCase() == "jazz") {
+        radio = "WineFarmAndTouristradio";
+      } else if (suffix.toLowerCase() == "dubstep") {
+        radio = "ELECTROPOP-MUSIC";
+      } else {
+        embed.setDescription("• Insert a correct radio to play.\n\n`[-]` **Available radios:** `Rap, jazz & dubstep`");
+        embed.setColor("#b92727");
+        return msg.channel.send({ embed });
+      }
+      msg.member.voiceChannel.join().then(connection => {
+        require('http').get("http://streaming.radionomy.com/" + radio, (res) => {
+          connection.playStream(res);
+          embed.setColor("#b92727");
+          embed.setDescription("<:tick2:445752599631888384> Playing correctly!");
+          msg.channel.send({ embed });
+        });
+      }).catch(err => "<:tick:445752370324832256> **Error:** ```\n" + err + "```");
+    }
+  },
+  "invite": {
 		process: function (msg, suffix) {
-			msg.channel.send(":tickets:  |  **Invite link:** `https://discordapp.com/oauth2/authorize?client_id=273463982625652737&scope=bot&permissions=314497`");
+      embed.setDescription("**Invite link:** `https://discordapp.com/oauth2/authorize?client_id=273463982625652737&scope=bot&permissions=314497");
+      embed.setColor("#b92727");
+      msg.channel.send({ embed });
 		}
 	}
 };
@@ -96,12 +94,16 @@ bot.on("ready", function () {
 // Command System
 bot.on('message', function (msg) {
     if (msg.content.indexOf(config.prefix) === 0) {
-  		const command = msg.content.split(" ")[0].substring(config.prefix.length);
-      const suffix = msg.content.substring(command.length + config.prefix.length + 1);
-      const embed = new Discord.RichEmbed();
+      console.log(`(${msg.guild.name}) ${msg.author.tag}: ${msg.content}`); // Command logger
+
+  		const command = msg.content.split(" ")[0].substring(config.prefix.length); // Command
+      const suffix = msg.content.substring(command.length + config.prefix.length + 1); // Arguments
+      const embed = new Discord.RichEmbed(); // Gets Rich Embed
+
+      if (!commands[command]) return; // Return if the command doesn't exists
       try {
-        commands[command].process(msg, suffix, embed);
-      } catch(err) {
+        commands[command].process(msg, suffix, embed); // Execute the command
+      } catch(err) { // Catch an error
         msg.channel.send({embed: {"description": "<:tick:445752370324832256> **Error:** ```\n" + err + "```", "color": 0xff0000}});
       }
     }
