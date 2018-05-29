@@ -9,25 +9,22 @@ console.log("[!] Starting bot...");
 // Commands
 const commands = {
     "help": {
-        process: function (msg, suffix) {
-            msg.author.send([
-                ":page_facing_up:  |  **Commands available:**",
-				"```perl",
-                "br!help #Sends this message",
-                "br!join #Join to your channel",
-				"br!leave #Leaves the voice channel",
-				"br!play <rap/jazz/dubstep> #Play the radio",
-				//"br!search #Find a radio and play",
-				"br!invite #Generate an invitation link you can use to invite the bot to your server",
-				"```",
-				"",
-				"Hi! I'm **Baba Radio**, A simple bot focused on play music. I'm developed by `perronosaurio (Waxtz)#1767`"
-            ]);
-            msg.channel.send(":mailbox_with_mail:  |  **Check your private messages!**");
+        process: function (msg, suffix, embed) {
+          const list = ["```perl",
+          "br!help #Sends this help message",
+          "br!join #Join to your voice channel",
+          "br!leave #Exit the voice channel",
+          "br!play <rap/jazz/dubstep> #Play a specific radio",
+          "br!invite #Generate an invitation link to invite me to your server```",
+          "Hi! I'm **Baba Radio**, a simple bot focused on play music. I'm developed by `perronosaurio (Waxtz)#1767`"]
+          embed.setDescription(list);
+          embed.setAuthor("Command list!", "https://cdn.discordapp.com/attachments/330739726321713153/451061091322298378/jajajaxdxdxd.png");
+          embed.setColor("#b92727");
+          msg.channel.send({ embed });
         }
     },
     "join": {
-        process: function (msg, suffix) {
+        process: function (msg, suffix, embed) {
 			const channel = msg.member.voiceChannel;
 			if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
 			if(!msg.member.voiceChannel.joinable) {
@@ -39,7 +36,7 @@ const commands = {
         }
     },
     "play": {
-        process: function (msg, suffix) {
+        process: function (msg, suffix, embed) {
 			const channel = msg.member.voiceChannel;
 			if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
 			if (suffix) {
@@ -84,7 +81,7 @@ const commands = {
 	},
 	"invite": {
 		process: function (msg, suffix) {
-			msg.channel.send(":tickets:  |  **Invite link:** `https://discordapp.com/oauth2/authorize?&client_id=321784105119514625&scope=bot&permissions=36702208`");
+			msg.channel.send(":tickets:  |  **Invite link:** `https://discordapp.com/oauth2/authorize?client_id=273463982625652737&scope=bot&permissions=314497`");
 		}
 	}
 };
@@ -93,17 +90,18 @@ const commands = {
 bot.on("ready", function () {
 	console.log("[*] Logged in " + bot.guilds.array().length + " servers!");
   setInterval(function() {
-  	bot.user.setGame(config.prefix + "help | " + bot.guilds.array().length + " servers");
+  	bot.user.setActivity(config.prefix + "help | " + bot.guilds.array().length + " servers!");
   }, 100000)
 });
 
 // Command System
 bot.on('message', function (msg) {
     if (msg.content.indexOf(config.prefix) === 0) {
-  		var command = msg.content.split(" ")[0].substring(config.prefix.length);
-      var suffix = msg.content.substring(command.length + config.prefix.length + 1);
+  		const command = msg.content.split(" ")[0].substring(config.prefix.length);
+      const suffix = msg.content.substring(command.length + config.prefix.length + 1);
+      const embed = new Discord.RichEmbed();
       try {
-        commands[command].process(msg, suffix);
+        commands[command].process(msg, suffix, embed);
       } catch(err) {
         msg.channel.send({embed: {"description": "<:tick:445752370324832256> **Error:** ```\n" + err + "```", "color": 0xff0000}});
       }
