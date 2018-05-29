@@ -15,8 +15,4 @@
   "bugs": {
     "url": "https://github.com/perronosaurio/Baba-Radio/issues"
   },
-  "homepage": "http://baba.is-best.net/",
-  "dependencies": {
-    "discord.js": "11.1.0"
-  }
 }
