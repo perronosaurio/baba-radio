@@ -47,6 +47,7 @@ const commands = {
 	"play": {
 		process: function (msg, suffix, embed) {
 			if (!msg.member.voiceChannel) return msg.channel.send('<:tick:445752370324832256> You are not on a voice channel.');
+			if (!msg.member.voiceChannel.joinable) return msg.channel.send("<:tick:445752370324832256> I\'m unable to play music in this channel.");
 			if (!suffix) {
 				embed.setDescription("• Insert a correct radio to play.\n\n`[-]` **Available radios:** `Rap, jazz & dubstep`");
 				embed.setColor("#b92727");
