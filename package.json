@@ -1,22 +1,18 @@
 {
-  "name": "BabaRadio",
-  "version": "1.0.0",
+  "name": "baba-radio",
+  "version": "2.0.0",
   "description": "A simple radio bot for Discord",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/perronosaurio/Baba-Radio.git"
+    "start": "node -r dotenv/config index.js"
   },
   "author": "perronosaurio",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/perronosaurio/Baba-Radio/issues"
-  },
   "dependencies": {
-    "discord.js": "^11.3.2",
-    "opusscript": "^0.0.6"
+    "discord.js": "^11.5.1"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1",
+    "dotenv": "^7.0.0"
   }
 }
