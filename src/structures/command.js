@@ -7,7 +7,6 @@ module.exports = class Command {
   }
 
   _run (message, args) {
-    if (this.onlyDev && message.author.id === process.env.OWNER) return
     return this.run(message, args)
   }
 

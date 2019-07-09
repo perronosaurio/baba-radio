@@ -1,5 +1,4 @@
 const { Client } = require('discord.js')
-const { search, streamURL } = require('iheart')
 const { readdirSync } = require('fs')
 
 module.exports = class Baba extends Client {
