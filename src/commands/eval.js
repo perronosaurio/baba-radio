@@ -31,8 +31,4 @@ module.exports = class Eval extends Command {
       )
     }
   }
-
-  canRun (message, args) {
-    return message.author.id === process.env.OWNER
-  }
 }
