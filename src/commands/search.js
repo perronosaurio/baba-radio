@@ -8,7 +8,7 @@ module.exports = class Search extends Command {
   constructor (client) {
     super(client, {
       name: 'search',
-      aliases: ['find', 'play']
+      aliases: ['find', 'play', 'iheart']
     })
   }
 
@@ -27,7 +27,7 @@ module.exports = class Search extends Command {
       new RichEmbed()
         .setTitle('Choose a station to continue or say cancel! (10 seconds left)')
         .setDescription(description.join('\n'))
-        .setAuthor(`Results for "${args}"`, 'https://cdn.discordapp.com/attachments/330739726321713153/598279500362416129/kisspng-iheartradio-iheartmedia-app-store-internet-radio-hibiki-radio-station-5b3d78199a0fb4.png')
+        .setAuthor(`Results for "${args}"`, 'https://cdn.discordapp.com/attachments/330739726321713153/598282410349690890/kisspng-iheartradio-iheartmedia-app-store-internet-radio-hibiki-radio-station-5b3d78199a0fb4.png')
         .setFooter(message.author.tag)
         .setColor('b92727')
         .setTimestamp()
@@ -47,13 +47,14 @@ module.exports = class Search extends Command {
               new RichEmbed()
                 .setColor('b92727')
                 .setDescription([
-                  `Now playing station **${station.name}**`,
+                  `<:iheart:598282706970738711> Now playing station **${station.name}**`,
                   '',
                   `• **Frequency:** ${station.frequency} ${station.band}`,
                   `• **City:** ${station.city}`,
                   `• **Score:** ${station.score.toFixed(1)}`
                 ].join('\n'))
                 .setThumbnail(station.newlogo)
+                .setFooter('If the station doesn\'t listen, try search another')
             )
           }).catch(e => this.client.log('error', e))
         })
