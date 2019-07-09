@@ -27,7 +27,7 @@ module.exports = class Search extends Command {
       new RichEmbed()
         .setTitle('Choose a station to continue or say cancel! (10 seconds left)')
         .setDescription(description.join('\n'))
-        .setAuthor(`Results for "${args}"`, 'https://cdn.discordapp.com/attachments/330739726321713153/598282410349690890/kisspng-iheartradio-iheartmedia-app-store-internet-radio-hibiki-radio-station-5b3d78199a0fb4.png')
+        .setAuthor(`Search results for "${args}"`, 'https://cdn.discordapp.com/attachments/330739726321713153/598282410349690890/kisspng-iheartradio-iheartmedia-app-store-internet-radio-hibiki-radio-station-5b3d78199a0fb4.png')
         .setFooter(message.author.tag)
         .setColor('b92727')
         .setTimestamp()
