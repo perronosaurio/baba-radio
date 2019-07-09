@@ -13,7 +13,7 @@ module.exports = class Baba extends Client {
 
   _ready () {
     this.user.setActivity(`${this.guilds.size} Guilds · ${process.env.PREFIX}help`, { type: 'WATCHING' })
-    this.log('INFO', 'I\'ve already woken up!')
+    this.log('info', 'I\'ve already woken up!')
   }
 
   log (type, ...args) {
@@ -28,9 +28,9 @@ module.exports = class Baba extends Client {
           this.commands.push(new Command(this))
           delete require.cache[require.resolve(`./commands/${file}`)]
         } catch (err) {
-          this.log('ERROR', err)
+          this.log('error', err)
         } finally {
-          this.log('COMMAND', `${file} loaded.`)
+          this.log('commands', `${file} loaded.`)
         }
       }
     })
@@ -45,9 +45,9 @@ module.exports = class Baba extends Client {
           super.on(event.name, (...args) => event._run(...args))
           delete require.cache[require.resolve(`./events/${file}`)]
         } catch (err) {
-          this.log('ERROR', err)
+          this.log('error', err)
         } finally {
-          this.log('EVENT', `${file} loaded.`)
+          this.log('events', `${file} loaded.`)
         }
       }
     })

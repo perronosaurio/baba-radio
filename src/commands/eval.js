@@ -9,7 +9,8 @@ module.exports = class Eval extends Command {
   constructor (client) {
     super(client, {
       name: 'eval',
-      aliases: ['evaluate']
+      aliases: ['evaluate'],
+      onlyDev: true
     })
   }
 
@@ -32,6 +33,6 @@ module.exports = class Eval extends Command {
   }
 
   canRun (message, args) {
-    return message.author.id === '237947982769553408'
+    return message.author.id === process.env.OWNER
   }
 }

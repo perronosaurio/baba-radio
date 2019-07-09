@@ -17,9 +17,9 @@ module.exports = class Message extends Event {
           try {
             command._run(message, args)
           } catch (e) {
-            this.client.log('ERROR', e)
+            this.client.log('error', e)
           } finally {
-            this.client.log('INFO', `${message.author.tag} issue command: ${message.content}`)
+            this.client.log('info', `${message.author.tag} issue command: ${message.content}`)
           }
         }
       }
