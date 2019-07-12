@@ -19,7 +19,7 @@ module.exports = class Search extends Command {
     if (message.member.voiceChannel === undefined) return message.channel.send('<:tick:445752370324832256> You\'re not in a voice channel.')
     if (!message.member.voiceChannel.joinable) return message.channel.send('<:tick:445752370324832256> I can\'t join this voice channel.')
     if (voiceChannel && voiceChannel.channel.id !== message.member.voiceChannel.id) return message.channel.send('<:tick:445752370324832256> You must be in the same voice channel as me.')
-    if (matches.stations.length === 0) return message.channel.send('<:tick:445752370324832256> No stations found.')
+    if (matches.length === 0) return message.channel.send('<:tick:445752370324832256> No stations found.')
     for (let i = 0; i < 5; i++) description.push(`\`${i + 1}.\` ${matches.stations[i].name}`)
 
     message.channel.send(
